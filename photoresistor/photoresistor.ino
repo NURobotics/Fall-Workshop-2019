@@ -1,7 +1,7 @@
 
 
-const int leftPR = A6;
-const int rightPR = A7;
+const int leftPR = A1;
+const int rightPR = A2;
 
 void setup() {
   Serial.begin(9600);
