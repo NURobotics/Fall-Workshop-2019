@@ -1,7 +1,7 @@
-const int MLDIR = 2;
-const int MLPWM = 3;
-const int MRDIR = 4;
-const int MRPWM = 5;
+const int MLDIR = 4;
+const int MLPWM = 5;
+const int MRDIR = 2;
+const int MRPWM = 3;
 
 const int leftPR = A1;
 const int rightPR = A2;
