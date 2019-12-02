@@ -13,6 +13,9 @@ int ml_direction = HIGH;
 
 int mr_speed = 255;
 int mr_direction = HIGH;
+
+float prevratio =1;
+
 void setup() {
   // put your setup code here, to run once:
 
@@ -38,35 +41,45 @@ void loop() {
   int leftVal, rightVal;
   leftVal = analogRead(leftPR);
   rightVal = analogRead(rightPR);
+  Serial.print("L: ");
+  Serial.print(ml_speed);
+  Serial.print("\tR: ");
+  Serial.print(mr_speed);
   Serial.print("left: ");
   Serial.print(leftVal);
   Serial.print(" right: ");
-  Serial.println(rightVal);
+  Serial.print(rightVal);
+  float ratio = (float) leftVal / (float) rightVal;
+  Serial.print(" ratio: ");
+  Serial.print(ratio);
+  Serial.print(" prevratio: ");
+  Serial.println(prevratio-ratio);
   if (0){
     ml_speed = 255;
     mr_speed = 255;
     ml_direction = LOW;
     mr_direction = LOW;
   }
-  else if((float) leftVal /(float) rightVal > THRESH){
-    mr_speed = 150;
-    ml_speed = 150;
-    mr_direction = LOW;
+  else if(ratio > 1.2){
+    mr_speed = max((int)(200-(50*ratio)-200*(ratio-prevratio)),0);
+    ml_speed = 200;
+    mr_direction = HIGH;
     ml_direction = HIGH;
     
   }
-  else if((float)rightVal / (float) leftVal > THRESH){
-    mr_speed = 150;
-    ml_speed = 150;
+  else if(ratio < 0.83){
+    mr_speed = 200;
+    ml_speed = max((int)(200-(50/ratio)-200*(prevratio-ratio)),0);
     mr_direction = HIGH;
-    ml_direction = LOW;
+    ml_direction = HIGH;
   }
   else {
-    mr_speed = 255;
-    ml_speed = 255;
+    mr_speed = 200;
+    ml_speed = 200;
     mr_direction = HIGH;
     ml_direction = HIGH;
-    
   }
+
+  prevratio = ratio;
 
 }
