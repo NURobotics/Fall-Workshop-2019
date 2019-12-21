@@ -61,23 +61,23 @@ void loop() {
     mr_direction = LOW;
   }
   else if(ratio > 1.2){
-    mr_speed = max((int)(200-(50*ratio)-200*(ratio-prevratio)),0);
-    ml_speed = 200;
-    mr_direction = HIGH;
-    ml_direction = HIGH;
+    ml_speed = max((int)(200-(50*ratio)-200*(ratio-prevratio)),0);
+    mr_speed = 200;
+    mr_direction = LOW;
+    ml_direction = LOW;
     
   }
   else if(ratio < 0.83){
-    mr_speed = 200;
-    ml_speed = max((int)(200-(50/ratio)-200*(prevratio-ratio)),0);
-    mr_direction = HIGH;
-    ml_direction = HIGH;
+    ml_speed = 200;
+    mr_speed = max((int)(200-(50/ratio)-200*(prevratio-ratio)),0);
+    mr_direction = LOW;
+    ml_direction = LOW;
   }
   else {
     mr_speed = 200;
     ml_speed = 200;
-    mr_direction = HIGH;
-    ml_direction = HIGH;
+    mr_direction = LOW;
+    ml_direction = LOW;
   }
 
   prevratio = ratio;
